@@ -18,6 +18,14 @@ IE: ``` python3 askbash.py REQUEST -v ```
 
 ![VerboseExample](https://github.com/kikoncuo/AskBash/blob/main/images/verboseExample.png)
 
+It works best with smaller requests, but can handle more complex ones with multiples steps as well
+
+![gitExample](https://github.com/kikoncuo/AskBash/blob/main/images/gitExample.png)
+
+Or requests with multiple flags and parameters
+
+![dockerExample](https://github.com/kikoncuo/AskBash/blob/main/images/dockerExample.png)
+
 
 ## How do I use it?
 1. Clone the repository

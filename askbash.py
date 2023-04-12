@@ -4,6 +4,7 @@ import re
 import subprocess
 import signal
 import glob
+import shlex
 from prompt_toolkit import PromptSession
 
 from langchain.chat_models import ChatOpenAI
@@ -55,7 +56,10 @@ def find_bash_substring(s):
         return False
     
 def stream_command_output(command):
-    my_array = command.split()
+    if command=='':
+        print("Skipping this command")
+        return
+    my_array = shlex.split(command)
     if '*' in my_array:
         index = my_array.index('*')
         my_array = my_array[:index] + glob.glob('*') + my_array[index+1:]
@@ -221,10 +225,12 @@ else:
 
     print("\n Hit enter to run the commands or edit them, If there are multiple command they will be shown and executed one by one.")
     try:
-        while True:
-            for command in command_list:
-                edited_text = session.prompt(message="> ", default=command)
-                output = stream_command_output(edited_text)
+        for command in command_list:
+            edited_text = session.prompt(message="> ", default=command)
+            print(edited_text)
+            output = stream_command_output(edited_text)
+    except IndexError:
+        print("")
     except KeyboardInterrupt:
         print('Cancelled execution...')
         sys.exit(0)
